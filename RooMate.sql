@@ -1,3 +1,5 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 CREATE TABLE "users" (
   "id" UUID PRIMARY KEY DEFAULT (uuid_generate_v4()),
   "name" VARCHAR(100) NOT NULL,
@@ -7,7 +9,7 @@ CREATE TABLE "users" (
   "role_name" VARCHAR(30) NOT NULL,
   "created_at" TIMESTAMP DEFAULT (CURRENT_TIMESTAMP),
   "updated_at" TIMESTAMP NOT NULL,
-  "is_deleted" BOOL
+  "is_deleted" BOOL DEFAULT false
 );
 
 CREATE TABLE "customers" (
@@ -18,7 +20,7 @@ CREATE TABLE "customers" (
   "phone_number" VARCHAR(50) NOT NULL,
   "created_at" TIMESTAMP DEFAULT (CURRENT_TIMESTAMP),
   "updated_at" TIMESTAMP NOT NULL,
-  "is_deleted" BOOL
+  "is_deleted" BOOL DEFAULT false
 );
 
 CREATE TABLE "rooms" (
@@ -31,7 +33,7 @@ CREATE TABLE "rooms" (
   "status" VARCHAR(30),
   "created_at" TIMESTAMP DEFAULT (CURRENT_TIMESTAMP),
   "updated_at" TIMESTAMP NOT NULL,
-  "is_deleted" BOOL
+  "is_deleted" BOOL DEFAULT false
 );
 
 CREATE TABLE "services" (
@@ -40,7 +42,7 @@ CREATE TABLE "services" (
   "price" BIGINT NOT NULL,
   "created_at" TIMESTAMP DEFAULT (CURRENT_TIMESTAMP),
   "updated_at" TIMESTAMP NOT NULL,
-  "is_deleted" BOOL
+  "is_deleted" BOOL DEFAULT false
 );
 
 CREATE TABLE "bookings" (
@@ -56,7 +58,7 @@ CREATE TABLE "bookings" (
   "total_price" BIGINT,
   "created_at" TIMESTAMP DEFAULT (CURRENT_TIMESTAMP),
   "updated_at" TIMESTAMP NOT NULL,
-  "is_deleted" BOOL
+  "is_deleted" BOOL DEFAULT false
 );
 
 CREATE TABLE "booking_details" (
@@ -67,7 +69,7 @@ CREATE TABLE "booking_details" (
   "sub_total" BIGINT,
   "created_at" TIMESTAMP DEFAULT (CURRENT_TIMESTAMP),
   "updated_at" TIMESTAMP NOT NULL,
-  "is_deleted" BOOL
+  "is_deleted" BOOL DEFAULT false
 );
 
 CREATE TABLE "roles" (
@@ -75,7 +77,7 @@ CREATE TABLE "roles" (
   "role_name" VARCHAR(100) NOT NULL,
   "created_at" TIMESTAMP DEFAULT (CURRENT_TIMESTAMP),
   "updated_at" TIMESTAMP NOT NULL,
-  "is_deleted" BOOL
+  "is_deleted" BOOL DEFAULT false
 );
 
 ALTER TABLE "bookings" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
